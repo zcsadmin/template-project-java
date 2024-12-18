@@ -1,0 +1,15 @@
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <!-- Generating the file information is not particularly fast. Thus, its use should be avoided unless execution speed is not an issue. -->
+      <pattern>%d{HH:mm:ss.SSS Z} %highlight(%-5level) %msg%n</pattern>
+      <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %msg - %F:%L%n</pattern>-->
+    </encoder>
+  </appender>
+
+  <logger name="zcsapp" level="${APP_LOG_LEVEL:-INFO}"/>
+
+  <root level="${JAVA_LOG_LEVEL:-INFO}">
+    <appender-ref ref="STDOUT" />
+  </root>
+</configuration>

@@ -1,0 +1,5 @@
+app/target
+.data/
+.vscode/
+*.md
+run.sh

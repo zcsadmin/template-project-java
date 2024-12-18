@@ -1,0 +1,10 @@
+# Ignore vscode files
+/.vscode/
+
+/app/target/
+
+# Ignore .data directory but exclude .bashrc file
+.data/*
+!.data/bob-s-home
+.data/bob-s-home/*
+!.data/bob-s-home/.bashrc
