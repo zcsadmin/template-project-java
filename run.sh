@@ -5,7 +5,6 @@ EXEC=1
 TESTS=0
 VERBOSE=0
 DEBUG=0
-PREDICT=0
 DISTIMAGE=0
 CLEAR=0
 BACKGROUND=""
@@ -30,7 +29,6 @@ while getopts xp:bdsticvh flag
 do
     case "${flag}" in
         x) EXEC=1;;
-        p) PREDICT=1 PREDICT_ARG=${OPTARG};;
         b) BACKGROUND=" -d ";;
         d) DEBUG=1;;
         s) EXEC=0;;
@@ -39,6 +37,7 @@ do
         c) CLEAR=1;;
         v) VERBOSE=1;;
         h) show_help; exit 0;;
+        *) show_help; exit 1;;
     esac
 done
 

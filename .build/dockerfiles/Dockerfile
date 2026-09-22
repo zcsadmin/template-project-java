@@ -3,7 +3,7 @@
 #
 # Dev image used for local development
 #
-FROM zcscompany/java:17-dev AS dev
+FROM zcscompany/java:25-dev AS dev
 
 ARG FIX_UID
 ARG FIX_GID
@@ -38,7 +38,7 @@ RUN mvn --no-transfer-progress clean package
 #
 # This stage prepares a dist image used to run the application.
 #
-FROM zcscompany/java:17-dist AS dist
+FROM zcscompany/java:25-dist AS dist
 
 ARG DOCKER_USER=bob
 ARG DOCKER_GROUP=bob
