@@ -1,7 +1,15 @@
 # AGENTS.md - Template Project Java
 
 ## Project Overview
-Java 17 Maven project with Docker-based development workflow. Uses SLF4J/Logback, Lombok, JUnit 5.
+ZCS bootstrap template for new Java apps. Single Maven module in `app/`, Docker-based dev workflow. Lombok, SLF4J/Logback, JUnit 5. Compiles to Java 17 bytecode (`maven.compiler.source/target` in pom) but runs on `zcscompany/java:25-*` base images.
+
+## Template Bootstrap
+This repo is a template, not an app. Starting a new project means renaming these placeholders:
+- `app/pom.xml`: `groupId`, `artifactId`, `name`, `description`
+- Base Java package `dev.zcscloud.ml.tpj.app` ("tpj" = template project java) — rename folders under `app/src/main/java` and `app/src/test/java`
+- `docker-compose.yml`: `APP_NAME`
+- `README.md`: title
+The README "How to start" section documents the full flow (clone → reset git → rename → `./run.sh`).
 
 ## Key Commands
 
@@ -37,9 +45,11 @@ app/                    # Maven module
 ```
 
 ## Configuration
-- Environment variables take precedence over `app.properties`
-- Environment-specific configs: `app.{env}.properties` (e.g., `app.local.properties`)
-- Key env vars: `APP_NAME`, `APP_VERSION`, `APP_PORT`, `APP_ENVIRONMENT`, `APP_LOG_LEVEL`
+- Environment variables take precedence over property files (`Config.java`); `app.{env}.properties` is consulted first when `APP_ENVIRONMENT` is set
+- Only the default `app.properties` ships in this repo (compose sets `APP_ENVIRONMENT=local`, so the env-specific lookup silently falls back)
+- `app.properties` is Maven-filtered at build: `app.version=${project.version}` is substituted into the JAR resources
+- Env vars set by `docker-compose.yml`: `APP_NAME`, `APP_PORT`, `APP_ENVIRONMENT`
+- Logback levels: `APP_LOG_LEVEL` (zcsapp logger), `JAVA_LOG_LEVEL` (root) — defaults `INFO`
 
 ## Docker Workflow
 - `docker-compose.yml` defines `app` service (dev target)
